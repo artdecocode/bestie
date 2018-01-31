@@ -2,7 +2,7 @@
 
 `bestie` is a new Node.js npm package.
 
-## `bestie():void`
+## `bestie({`<br/>&nbsp;&nbsp;`arg: String`<br/>`}):void`
 
 Call this function to get a result you want.
 
@@ -14,6 +14,6 @@ bestie()
 
 ---
 
-(c) [Sobesednik][1] 2018
+(c) [sobes.io][1] 2018
 
-[1]: https://mnpjs.org
+[1]: https://sobes.io
