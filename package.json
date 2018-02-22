@@ -7,7 +7,7 @@
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
-    "build": "node bin/bestie src,bin,test"
+    "build": "node bin/bestie src,bin,test --copy-files"
   },
   "repository": {
     "type": "git",
