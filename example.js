@@ -1,3 +1,0 @@
-const bestie = require('./')
-
-bestie()

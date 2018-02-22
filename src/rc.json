@@ -16,6 +16,7 @@
     ]
   ],
   "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
     [
       "module:fast-async",
       {
