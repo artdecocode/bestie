@@ -1,6 +1,6 @@
 {
   "name": "bestie",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "bestie compiles modules into es5.",
   "main": "src/index.js",
   "bin": "es5/bin/bestie.js",
