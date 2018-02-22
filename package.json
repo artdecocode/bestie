@@ -1,17 +1,21 @@
 {
   "name": "bestie",
   "version": "0.1.0",
-  "description": "bestie is the best friend for compiling packages to es5 code with babel",
+  "description": "bestie compiles modules into es5.",
   "main": "src/index.js",
+  "bin": "es5/bin/bestie.js",
   "scripts": {
     "test": "zoroaster test/spec",
-    "test-watch": "zoroaster test/spec --watch"
+    "test-watch": "zoroaster test/spec --watch",
+    "build": "node bin/bestie src,bin,test"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/Sobesednik/bestie.git"
   },
-  "keywords": ["bestie"],
+  "keywords": [
+    "bestie"
+  ],
   "author": "Anton <anton@sobes.io>",
   "license": "MIT",
   "bugs": {
@@ -19,6 +23,15 @@
   },
   "homepage": "https://github.com/Sobesednik/bestie#readme",
   "devDependencies": {
-    "zoroaster": "0.4.6"
+    "zoroaster": "0.5.3"
+  },
+  "dependencies": {
+    "@babel/cli": "7.0.0-beta.40",
+    "@babel/core": "7.0.0-beta.40",
+    "@babel/preset-env": "7.0.0-beta.40",
+    "babel-plugin-transform-rename-import": "2.1.1",
+    "fast-async": "6.3.0",
+    "spawncommand": "1.1.0",
+    "wrote": "1.4.0"
   }
 }
