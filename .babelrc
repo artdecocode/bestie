@@ -25,7 +25,7 @@
       "transform-rename-import",
       {
         "original": "wrote",
-        "replacement": "wrote/es5"
+        "replacement": "wrote/es5/src"
       }
     ]
   ]
