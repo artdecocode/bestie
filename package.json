@@ -1,9 +1,9 @@
 {
   "name": "bestie",
   "version": "1.0.0",
-  "description": "bestie compiles modules into es5.",
-  "main": "src/index.js",
-  "bin": "es5/bin/bestie.js",
+  "description": "bestie compiles packages with babel.",
+  "main": "build/srs",
+  "bin": "build/bin",
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
@@ -23,15 +23,16 @@
   },
   "homepage": "https://github.com/Sobesednik/bestie#readme",
   "devDependencies": {
-    "zoroaster": "0.5.3"
+    "@babel/cli": "7.0.0-beta.51",
+    "@babel/core": "7.0.0-beta.51",
+    "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.51",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.51",
+    "@babel/register": "7.0.0-beta.51",
+    "babel-plugin-transform-rename-import": "2.2.0",
+    "yarn-s": "1.1.0",
+    "zoroaster": "2.1.0"
   },
   "dependencies": {
-    "@babel/cli": "7.0.0-beta.40",
-    "@babel/core": "7.0.0-beta.40",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.40",
-    "@babel/preset-env": "7.0.0-beta.40",
-    "babel-plugin-transform-rename-import": "2.1.1",
-    "fast-async": "6.3.0",
     "spawncommand": "1.1.0",
     "wrote": "1.4.0"
   }
