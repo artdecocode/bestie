@@ -1,15 +1,16 @@
-const assert = require('assert')
-const context = require('../context/')
-const bestie = require('../..')
+import { assert } from 'zoroaster/assert'
+import Context from '../context'
+import bestie from '../src'
 
-const bestieTestSuite = {
-  context,
-  'should be a function': () => {
+/** @type {Object.<string, (c: Context)>} */
+const T = {
+  context: Context,
+  'is a function': () => {
     assert.equal(typeof bestie, 'function')
   },
-  async 'should call package without error'() {
+  async 'calls package without error'() {
     await bestie()
   },
 }
 
-module.exports = bestieTestSuite
+export default T

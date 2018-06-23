@@ -1,5 +1,3 @@
-function Context () {
+export default class Context {
 
 }
-
-module.exports = Context

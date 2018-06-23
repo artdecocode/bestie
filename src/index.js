@@ -1,6 +1,6 @@
-const spawncommand = require('spawncommand')
-const { resolve, join } = require('path')
-const { createWritable, write, readJSON, read } = require('wrote')
+import spawn from 'spawncommand'
+import { resolve, join } from 'path'
+import { createWritable, write, readJSON, read } from 'wrote'
 
 const babelpath = require.resolve('@babel/cli/bin/babel.js')
 
@@ -22,7 +22,7 @@ async function bestie({
 
   for (let i = 0; i < jobs.length; i++) {
     const { from, to } = jobs[i]
-    const proc = spawncommand(babelpath, [
+    const proc = spawn(babelpath, [
       from,
       '--out-dir',
       to,
@@ -46,4 +46,4 @@ async function bestie({
   console.log('%s now points to %s ', join(destination, 'index.js'), join(destination, main))
 }
 
-module.exports = bestie
+export default bestie
