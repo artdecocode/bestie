@@ -11,6 +11,8 @@ var _argufy = _interopRequireDefault(require("argufy"));
 
 var _usually = _interopRequireDefault(require("usually"));
 
+var _spawncommand = _interopRequireDefault(require("spawncommand"));
+
 var _ = _interopRequireDefault(require(".."));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -20,7 +22,9 @@ const {
   from: _from = 'src',
   'out-dir': _to = 'build',
   _argv,
-  help: _help
+  extract: _extract,
+  help: _help,
+  install: _install
 } = (0, _argufy.default)({
   init: {
     short: 'i',
@@ -36,6 +40,14 @@ const {
   'out-dir': '-d',
   args: {
     short: 'a'
+  },
+  extract: {
+    short: 'e',
+    boolean: true
+  },
+  install: {
+    short: 'I',
+    boolean: true
   }
 });
 const readable = (0, _path.resolve)(__dirname, '../rc.json');
@@ -72,11 +84,27 @@ if (_help) {
   process.exit();
 }
 
+const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-syntax-object-rest-spread', '@babel/plugin-transform-modules-commonjs', 'babel-plugin-transform-rename-import'];
+
 (async () => {
+  if (_extract) {
+    require('./extract');
+
+    return;
+  }
+
   try {
     if (_init) {
       await init();
       console.log('Written .babelrc file in the current directory');
+      return;
+    }
+
+    if (_install) {
+      const p = (0, _spawncommand.default)('yarn', ['add', '-DE', ...modules]);
+      p.stderr.pipe(process.stderr);
+      p.stdout.pipe(process.stdout);
+      await p.promise;
       return;
     }
 
