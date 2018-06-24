@@ -5,9 +5,12 @@ import { resolve } from 'path'
 import argufy from 'argufy'
 import usually from 'usually'
 import spawn from 'spawncommand'
+import { askSingle } from 'reloquent'
+import bosom from 'bosom'
+import { c } from 'erte'
 import bestie from '..'
 import extract from './extract'
-import { modules } from '../lib'
+import { modules, makeSSd, filterInstalled } from '../lib'
 
 const {
   init: _init,
@@ -17,14 +20,16 @@ const {
   extract: _extract,
   help: _help,
   install: _install,
+  uninstall: _uninstall,
 } = argufy({
   init: { short: 'i', boolean: true },
   help: { short: 'h', boolean: true },
   from: { command: true },
-  'out-dir': '-d',
+  'out-dir': 'd',
   args: { short: 'a' },
   extract: { short: 'e' },
   install: { short: 'I', boolean: true },
+  uninstall: { short: 'u', boolean: true },
 })
 
 const readable = resolve(__dirname, '../rc.json')
@@ -78,6 +83,35 @@ if (_help) {
         'add',
         '-DE',
         ...modules,
+      ])
+      p.stderr.pipe(process.stderr)
+      p.stdout.pipe(process.stdout)
+      await p.promise
+      return
+    }
+    if (_uninstall) {
+      let name
+      try {
+        ({ name } = await bosom('package.json'))
+      } catch (err) {
+        throw new Error('Cannot read package.json on the current package')
+      }
+      const [{ devDependencies }] = makeSSd([{ path: 'node_modules' }], '.')
+      const i = filterInstalled(modules, devDependencies)
+      const titles = i.map(j => `${j}@${devDependencies[j]}`)
+      if (!i.length) {
+        console.log('No @babel dependencies to remove for %s', name)
+        return
+      }
+      const y = await askSingle({
+        text: `Continue removing\n ${titles.map(a => c(a, 'grey')).join('\n ')}\nfrom ${name}?`,
+        defaultValue: 'y',
+      })
+      if (y != 'y') return
+      const p = spawn('yarn', [
+        'remove',
+        '-DE',
+        ...i,
       ])
       p.stderr.pipe(process.stderr)
       p.stdout.pipe(process.stdout)

@@ -4,6 +4,7 @@ import makePromise from 'makepromise'
 import spawn from 'spawncommand'
 import bosom from 'bosom'
 import tablature from 'tablature'
+import { makeSSd } from '../lib'
 
 // const dir = resolve(process.cwd())
 
@@ -54,25 +55,15 @@ const extract = async (_extract) => {
       // await bosom('bestie-cache.json', sd)
     // }
 
-    const ssd = sd.map((pckg) => {
-      pckg.packagePath = resolve(dir, pckg.path, '..')
-      const rel = relative(dir, pckg.packagePath)
-      if (rel == 'bestie') return undefined
-      const { packagePath } = pckg
-      const pc = resolve(packagePath, 'package.json')
-      const { devDependencies } = require(pc)
-      return {
-        rel,
-        devDependencies,
-        ...pckg,
-      }
-    }).filter(a => a).sort(({ size: sizeA }, { size: sizeB }) => {
-      const pa = parseInt(sizeA)
-      const pb = parseInt(sizeB)
-      if (pb > pa) return 1
-      if (pa > pb) return -1
-      return 0
-    })
+    const ssd = makeSSd(sd, dir)
+      .filter(a => a)
+      .sort(({ size: sizeA }, { size: sizeB }) => {
+        const pa = parseInt(sizeA)
+        const pb = parseInt(sizeB)
+        if (pb > pa) return 1
+        if (pa > pb) return -1
+        return 0
+      })
 
     const t = tablature({
       keys: ['rel', 'size'],

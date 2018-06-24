@@ -1,5 +1,5 @@
 import spawn from 'spawncommand'
-import { relative } from 'path'
+import { resolve, relative } from 'path'
 
 export async function singleBuild(from, to, args, {
   cwd = process.cwd(),
@@ -29,3 +29,30 @@ export const modules = [
   '@babel/plugin-transform-modules-commonjs',
   'babel-plugin-transform-rename-import',
 ]
+
+export const makeSSd = (sd, dir) => {
+  const ssd = sd.map(({ path, ...pckg }) => { // path to node modules
+    const packagePath = resolve(dir, path, '..')
+    const rel = relative(dir, packagePath)
+    if (rel == 'bestie') return undefined
+    const pc = resolve(packagePath, 'package.json')
+    const { devDependencies } = require(pc)
+    return {
+      rel,
+      devDependencies,
+      packagePath,
+      path,
+      ...pckg,
+    }
+  })
+  return ssd
+}
+
+export const filterInstalled = (mods, devDependencies, rel = 'unknown') => {
+  const d = Object.keys(devDependencies)
+  return mods.filter((m) => {
+    const i = d.some(key => key.startsWith(m))
+    if (!i) console.log('%s not installed for %s', m, rel)
+    return i
+  })
+}
