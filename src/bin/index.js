@@ -121,11 +121,11 @@ const readName = async () => {
         defaultValue: 'y',
       })
       if (y != 'y') return
-      const p = spawn('yarn', [
+      const args = [
         'remove',
-        '-DE',
         ...i,
-      ])
+      ]
+      const p = spawn('yarn', args)
       p.stderr.pipe(process.stderr)
       p.stdout.pipe(process.stdout)
       await p.promise
