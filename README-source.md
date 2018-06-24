@@ -128,14 +128,11 @@ Calling the `bestie` function from the source code will return a promise to tran
 ## How To Reduce The Size Of Node_modules
 
 
-
 Before upgrading to using `bestie`, a standard package `node_module` directory would occupy ~ 90 MB of disk space, including `@babel/cli`, `@babel/core`, `@babel/register`, `@babel/plugin-syntax-object-rest-spread`, `@babel/plugin-transform-modules-commonjs`, `babel-plugin-transform-rename-import` and `eslint`.
 
 At first, `@babel` was removed, and then `eslint`. This allowed to save 2 GB of disk space in total.
 
-```table
-[["name","v","size","size2","size3","final"],["adc.sh","7.0.0-beta.46",84064,46512,46512,"x0.8"],["africa","7.0.0-beta.51",88472,46200,7608,"x10.6"],["appshot","7.0.0-beta.49",104088,61680,25320,"x3.1"],["aqt","7.0.0-beta.51",124712,81040,5688,"x20.9"],["argufy","7.0.0-beta.51",62480,6600,6600,"x8.4"],["artdeco.bz","7.0.0-beta.47",197640,171032,147296,"x0.3"],["assert-throws","7.0.0-beta.46",60176,8064,8064,"x6.4"],["bestie","7.0.0-beta.51",64240,64104,64120,"x0"],["bosom","7.0.0-beta.49",90808,45840,7232,"x11.5"],["documentary","7.0.0-beta.51",90928,46544,7936,"x10.4"],["erotic","7.0.0-beta.49",89192,44520,5928,"x14"],["erte","7.0.0-beta.49",90896,45840,7232,"x11.5"],["eslint-config-artdeco","",4744,4744,4744,"x0"],["expensive","7.0.0-beta.51",91320,45896,7288,"x11.5"],["ictx","7.0.0-beta.49",89048,44296,5688,"x14.6"],["idio","7.0.0-beta.47",155456,111288,85512,"x0.8"],["idio-dev","7.0.0-beta.49",198536,173016,149816,"x0.3"],["irio","7.0.0-beta.49",89048,44296,5688,"x14.6"],["koa2-jsx","7.0.0-beta.47",125520,81568,55544,"x1.2"],["makepromise","7.0.0-beta.46",58456,6416,6416,"x8.1"],["mnp","7.0.0-beta.49",93176,48888,10280,"x8"],["mnp-idio","",4720,4720,4720,"x0"],["mnp-irio","",8,8,8,"x0"],["nodeeu","7.0.0-beta.49",89048,44296,5688,"x14.6"],["pedantry","7.0.0-beta.51",89800,46760,8152,"x10"],["pompeii","7.0.0-beta.49",89048,44296,5688,"x14.6"],["reloquent","7.0.0-beta.49",88568,44424,6296,"x13"],["restream","7.0.0-beta.51",63144,7592,7592,"x7.3"],["rqt","7.0.0-beta.51",173920,130864,67128,"x1.5"],["snapshot-context","7.0.0-beta.47",64456,7160,7160,"x8"],["spawncommand","7.0.0-beta.47",62264,4816,4816,"x11.9"],["tablature","7.0.0-beta.49",90744,7232,7232,"x11.5"],["usually","7.0.0-beta.49",90736,45840,7232,"x11.5"],["window-info","7.0.0-beta.49",89296,44296,5688,"x14.6"],["yarn-s","7.0.0-beta.46",56256,4744,4744,"x10.8"],["zoroaster","7.0.0-beta.47",90168,45832,7224,"x11.4"],["total","","3120 MB","1671 MB","801 MB","x3"]]
-```
+%FORK-table read-data.js%
 
 ---
 
