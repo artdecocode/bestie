@@ -8,7 +8,7 @@
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
     "dev": "node src/bin/register",
-    "build": "node bin/bestie src,bin,test --copy-files"
+    "build": "node src/bin/register --copy-files"
   },
   "repository": {
     "type": "git",
