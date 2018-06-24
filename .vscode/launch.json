@@ -41,6 +41,23 @@
       "skipFiles": [
         "<node_internals>/**/*.js"
       ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch App2",
+      "program": "${workspaceFolder}/example/index.js",
+      "env": {
+        "BABEL_ENV": "debug",
+        "NODE_DEBUG": "bestie",
+      },
+      "args": [
+        "example/example.js",
+      ],
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
     }
   ]
 }

@@ -119,7 +119,7 @@ Calling the `bestie` function from the source code will return a promise to tran
 
 %EXAMPLE: example/example.js, ..src => bestie, javascript%
 
-%FORK: example example/example.js%
+%FORK example example/example.js%
 
 ---
 

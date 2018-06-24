@@ -9,7 +9,8 @@
     "test-watch": "zoroaster test/spec --watch",
     "dev": "node src/bin/register",
     "doc": "NODE_DEBUG=doc doc README-source.md -o README.md",
-    "build": "node src/bin/register --copy-files"
+    "build": "node src/bin/register --copy-files",
+    "example": "NODE_DEBUG=bestie node example example/example.js"
   },
   "files": [
     "build"

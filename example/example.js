@@ -9,4 +9,4 @@ import bestie from '../src'
     stderr: process.stderr,
     cwd: process.cwd(),
   })
-})
+})()

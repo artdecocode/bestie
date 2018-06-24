@@ -121,10 +121,14 @@ import bestie from '../src'
     stderr: process.stderr,
     cwd: process.cwd(),
   })
-})
+})()
 ```
 
-%FORK: example example/example.js%
+```
+/Users/zavr/adc/bestie/node_modules/@babel/cli/bin/babel.js src --out-dir build --copy-files --include-dotfiles 
+
+🎉  Successfully compiled 4 files with Babel.
+```
 
 ---
 
