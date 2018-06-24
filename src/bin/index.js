@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { createWritable, write } from 'wrote'
 import { createReadStream } from 'fs'
 import { resolve } from 'path'
@@ -8,6 +7,7 @@ import usually from 'usually'
 import spawn from 'spawncommand'
 import bestie from '..'
 import extract from './extract'
+import { modules } from '../lib'
 
 const {
   init: _init,
@@ -61,17 +61,7 @@ if (_help) {
   process.exit()
 }
 
-
-const modules = [
-  '@babel/cli',
-  '@babel/core',
-  '@babel/register',
-  '@babel/plugin-syntax-object-rest-spread',
-  '@babel/plugin-transform-modules-commonjs',
-  'babel-plugin-transform-rename-import',
-]
-
-;(async () => {
+(async () => {
   if (_extract) {
     await extract(_extract)
     return

@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { exists } from 'wrote'
 import { symlink } from 'fs'
-import { singleBuild } from './lib'
+import { singleBuild, modules } from './lib'
 
 const NODE_MODULES = resolve(__dirname, '../node_modules')
 
@@ -22,6 +22,7 @@ const sl = async (...args) => {
   }
 }
 
+
 /**
  * Build the files.
  */
@@ -30,7 +31,16 @@ async function bestie({
   stdout = process.stdout, stderr = process.stderr,
   cwd = process.cwd(),
 } = {}) {
-  await sl('@babel', 'babel-plugin-transform-rename-import')
+  const e = await exists(resolve('node_modules', '@babel'))
+  if (e) {
+    await modules.reduce(async (a, c) => {
+      await a
+      await sl(c)
+    }, 1)
+  } else {
+    await sl('@babel')
+  }
+  await sl('babel-plugin-transform-rename-import')
   await singleBuild(from, to, args, {
     cwd,
     stderr,

@@ -116,15 +116,6 @@ const extract = async (_extract) => {
 
 export default extract
 
-const modules = [
-  '@babel/cli',
-  '@babel/core',
-  '@babel/register',
-  '@babel/plugin-syntax-object-rest-spread',
-  '@babel/plugin-transform-modules-commonjs',
-  'babel-plugin-transform-rename-import',
-]
-
 const split = (body) => {
   const re = /(\d+?)\s+(.+)/mg
   let r

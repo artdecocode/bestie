@@ -20,3 +20,12 @@ export async function singleBuild(from, to, args, {
 
   await proc.promise
 }
+
+export const modules = [
+  '@babel/cli',
+  '@babel/core',
+  '@babel/register',
+  '@babel/plugin-syntax-object-rest-spread',
+  '@babel/plugin-transform-modules-commonjs',
+  'babel-plugin-transform-rename-import',
+]
