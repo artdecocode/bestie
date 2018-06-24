@@ -1,124 +1,87 @@
 # bestie
 
-`bestie` is a _Node.js_ package to create an `es5` directory in the project
-directory which can be required from Node 4 and browsers with minimal
-configuration. `async` is transpiled using `fast-async` to avoid runtimes. An
-`index.js` file is created in the `es5` directory to point to the transpiled
-main file, so that the bestified version of the module is just `package/es5`.
+[![npm version](https://badge.fury.io/js/bestie.svg)](https://npmjs.org/package/bestie)
+
+`bestie` is a Node.js package to build Node.js packages with `import` and `export` statements. The goal of this project is to start with using the babel AST parsing to build packages to allow functionality, however then to implement a regular expression transform stream which would update references to `import` into `require` statements. The motivation for this is that a modern Node.js package would only need a single babel transform to allow imports and exports, however all babel dependencies need to be installed and linked (around 5500 dependencies). Also, when transpiling, babel transform will use `requireInterop` expression which VS Code IDE cannot parse, and the JSDoc documentation disappears from all functions _etc_ not exported in the main file.
 
 ```sh
-yarn add bestie -D
+yarn add -E bestie
 ```
 
-```sh
-npm i bestie -g
+## Table Of Contents
+
+- [Table Of Contents](#table-of-contents)
+  * [CLI](#cli)
+    * [`package.json`](#packagejson)
+    * [`--init`, `-i`: Init .Babelrc](#--init--i-init-babelrc)
+    * [`--help`, `-h`: Show Help](#--help--h-show-help)
+- [API](#api)
+  * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-streamstderr-streamcwd-string-void)
+
+### CLI
+
+The usage via the CLI is encouraged and can be achieved by specifying a `script` field in the <a name="packagejson">`package.json`</a> file, e.g.,
+
+```json
+{
+  "name": "package",
+  "scripts": {
+  	"build": "b"
+  }
+}
 ```
 
-## bestie init
+#### `--init`, `-i`: Init .Babelrc
 
 Create a `.babelrc` file in the current direcory. The default content is:
 
 ```json
-{
-    "presets": [
-        ["@babel/env", {
-            "exclude": [
-                "transform-regenerator",
-                "transform-async-to-generator"
-            ],
-            "modules": false,
-            "debug": true,
-            "targets": {
-                "node": 4
-            }
-        }]
-    ],
-    "plugins": [
-        ["module:fast-async", {
-            "spec": true
-        }],
-        ["transform-rename-import", {
-            "original": "wrote",
-            "replacement": "wrote/es5"
-        }]
-    ]
-}
+
 ```
 
-## bestie build
+#### `--help`, `-h`: Show Help
 
 ```sh
-bestie build [dir] [dest] [--arg1, ..., --argN]
-```
+A command-line tool to build packages.
+  Source is the first argument, followed by any additional arguments
+  Default source is src and default out-dir is build.
+  Any other additional arguments are passed along to babel.
 
-When `.` is passed as source directory (`dir`), or not passed at all, it is assumed
-that `src` and `test` directories in the `cwd` need transpilation. A command to run
-`babel` will be executed, e.g.,:
 
-```sh
-# bestie build test build --copy-files --include-dotfiles
-./node_modules/.bin/babel test --out-dir build/test --copy-files --include-dotfiles
-```
+  bestie [src] [--out-dir build] [[--copy-files] --etc]
 
-Default output directory is `es5`.
+        --help, -h      print the help message
+        --init, -i      write the .babelrc in the current directory
 
-Source directories can be separated with a comma, e.g., `bestie build src,test`.
+  Example:
 
-## ES5 notice
-
-Include the information about transpiled version in the `README.md` file with
-the following lines:
-
-````markdown
-## ES5
-
-The package uses some newer language features. For your convenience, it's been
-transpiled to be compatible with Node 4. You can use the following snippet.
-
-```js
-const bestie = require('bestie/es5')
-```
-````
-
-## package.json
-
-`package.json` file can be configured to run `bestie` from local
-`node_modules`.
-
-```json
-{
-	"name": "package",
-	"scripts": {
-		"build": "bestie",
-		"build-test": "bestie test",
-		"build-src": "bestie src"
-	}
-}
+    bestie src --out-dir build --copy-files
 ```
 
 ## API
 
-`bestie` can be used programmatically and has the following API.
+`bestie` can also be used programmatically and has the following API.
 
-### _`async`_ `bestie({`<br/>&nbsp;&nbsp;`dir=`_`.`_`: String`<br/>&nbsp;&nbsp;`destination=`_`es5`_`: String`<br/>&nbsp;&nbsp;`args=`_`[]`_`: string[]`<br/>`})`
+### `async bestie(`<br/>&nbsp;&nbsp;`config: {`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`from?: string = src,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`to?: string = build,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`args?: string[] = [],`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stdout?: Stream = `process.stdout`,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stderr?: Stream = `process.stderr`,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`cwd?: string = `process.cwd()`,`<br/>&nbsp;&nbsp;`},`<br/>`): void`
 
-Call the `bestie` function from the source code to get a promise to transpile.
-`babel` will be spawned with `child_process`.
+Calling the `bestie` function from the source code will return a promise to transpile files. In background, `babel` will be spawned via the `child_process`.
 
-```js
-const bestie = require('bestie');
+```javascript
+import bestie from '../src'
 
 (async () => {
-	await bestie({
-		dir: 'src,bin,test',
-		destination: 'build',
-		args: ['--copy-files', '--include-dotfiles'],
-		stdout: process.stdout,
-  	stderr: process.stderr,
-		cwd: process.cwd()
-	})
+  await bestie({
+    from: 'src',
+    to: 'build',
+    args: ['--copy-files', '--include-dotfiles'],
+    stdout: process.stdout,
+    stderr: process.stderr,
+    cwd: process.cwd(),
+  })
 })
 ```
+
+%FORK: example example/example.js%
 
 ---
 

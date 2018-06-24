@@ -5,7 +5,7 @@ import { createReadStream } from 'fs'
 import { resolve } from 'path'
 import argufy from 'argufy'
 import usually from 'usually'
-import bestie from '../lib'
+import bestie from '..'
 
 const {
   init: _init,

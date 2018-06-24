@@ -2,7 +2,7 @@ import spawn from 'spawncommand'
 
 const babelpath = require.resolve('@babel/cli/bin/babel.js')
 
-async function singleBuild(from, to, args, {
+export async function singleBuild(from, to, args, {
   cwd = process.cwd(),
   stdout,
   stderr,
@@ -20,20 +20,3 @@ async function singleBuild(from, to, args, {
 
   await proc.promise
 }
-
-/**
- * Invoke package's main function
- */
-async function bestie({
-  from = 'src', to = 'build', args = [],
-  stdout = process.stdout, stderr = process.stderr,
-  cwd = process.cwd(),
-} = {}) {
-  await singleBuild(from, to, args, {
-    cwd,
-    stderr,
-    stdout,
-  })
-}
-
-export default bestie
