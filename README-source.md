@@ -117,7 +117,7 @@ const bestie = require('bestie/es5')
 
 Calling the `bestie` function from the source code will return a promise to transpile files. In background, `babel` will be spawned via the `child_process`.
 
-%EXAMPLE: example/example.js, ..src => bestie, javascript%
+%EXAMPLE: example/example.js, ../src => bestie, javascript%
 
 %FORK example example/example.js%
 

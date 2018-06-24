@@ -1,12 +1,13 @@
 import spawn from 'spawncommand'
+import { relative } from 'path'
 
-const babelpath = require.resolve('@babel/cli/bin/babel.js')
 
 export async function singleBuild(from, to, args, {
   cwd = process.cwd(),
   stdout,
   stderr,
 }) {
+  const babelpath = relative(cwd, require.resolve('@babel/cli/bin/babel.js'))
   const proc = spawn(babelpath, [
     from,
     '--out-dir',

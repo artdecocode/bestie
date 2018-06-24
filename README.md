@@ -110,7 +110,7 @@ A command-line tool to build packages.
 Calling the `bestie` function from the source code will return a promise to transpile files. In background, `babel` will be spawned via the `child_process`.
 
 ```javascript
-import bestie from '../src'
+import bestie from 'bestie'
 
 (async () => {
   await bestie({
@@ -125,7 +125,7 @@ import bestie from '../src'
 ```
 
 ```
-/Users/zavr/adc/bestie/node_modules/@babel/cli/bin/babel.js src --out-dir build --copy-files --include-dotfiles 
+node_modules/@babel/cli/bin/babel.js src --out-dir build --copy-files --include-dotfiles 
 
 🎉  Successfully compiled 4 files with Babel.
 ```
