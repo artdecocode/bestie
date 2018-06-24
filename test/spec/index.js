@@ -1,6 +1,6 @@
 import { assert } from 'zoroaster/assert'
 import Context from '../context'
-import bestie from '../src'
+import bestie from '../../src'
 
 /** @type {Object.<string, (c: Context)>} */
 const T = {
@@ -8,7 +8,7 @@ const T = {
   'is a function': () => {
     assert.equal(typeof bestie, 'function')
   },
-  async 'calls package without error'() {
+  async 'compiles files with regular expression'({ packagePath, buildPath }) {
     await bestie()
   },
 }

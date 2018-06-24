@@ -13,6 +13,12 @@ var _usually = _interopRequireDefault(require("usually"));
 
 var _spawncommand = _interopRequireDefault(require("spawncommand"));
 
+var _reloquent = require("reloquent");
+
+var _bosom = _interopRequireDefault(require("bosom"));
+
+var _erte = require("erte");
+
 var _ = _interopRequireDefault(require(".."));
 
 var _extract2 = _interopRequireDefault(require("./extract"));
@@ -28,7 +34,8 @@ const {
   _argv,
   extract: _extract,
   help: _help,
-  install: _install
+  install: _install,
+  uninstall: _uninstall
 } = (0, _argufy.default)({
   init: {
     short: 'i',
@@ -41,7 +48,7 @@ const {
   from: {
     command: true
   },
-  'out-dir': '-d',
+  'out-dir': 'd',
   args: {
     short: 'a'
   },
@@ -50,6 +57,10 @@ const {
   },
   install: {
     short: 'I',
+    boolean: true
+  },
+  uninstall: {
+    short: 'u',
     boolean: true
   }
 });
@@ -102,6 +113,42 @@ if (_help) {
 
     if (_install) {
       const p = (0, _spawncommand.default)('yarn', ['add', '-DE', ..._lib.modules]);
+      p.stderr.pipe(process.stderr);
+      p.stdout.pipe(process.stdout);
+      await p.promise;
+      return;
+    }
+
+    if (_uninstall) {
+      let name;
+
+      try {
+        ({
+          name
+        } = await (0, _bosom.default)('package.json'));
+      } catch (err) {
+        throw new Error('Cannot read package.json on the current package');
+      }
+
+      const [{
+        devDependencies
+      }] = (0, _lib.makeSSd)([{
+        path: 'node_modules'
+      }], '.');
+      const i = (0, _lib.filterInstalled)(_lib.modules, devDependencies);
+      const titles = i.map(j => `${j}@${devDependencies[j]}`);
+
+      if (!i.length) {
+        console.log('No @babel dependencies to remove for %s', name);
+        return;
+      }
+
+      const y = await (0, _reloquent.askSingle)({
+        text: `Continue removing\n ${titles.map(a => (0, _erte.c)(a, 'grey')).join('\n ')}\nfrom ${name}?`,
+        defaultValue: 'y'
+      });
+      if (y != 'y') return;
+      const p = (0, _spawncommand.default)('yarn', ['remove', '-DE', ...i]);
       p.stderr.pipe(process.stderr);
       p.stdout.pipe(process.stdout);
       await p.promise;

@@ -49,3 +49,10 @@ async function bestie({
 }
 
 export default bestie
+
+const regexBuild = async (r) => {
+  const res = r
+  return res
+}
+
+export { regexBuild }

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.regexBuild = exports.default = void 0;
 
 var _path = require("path");
 
@@ -64,3 +64,10 @@ async function bestie({
 
 var _default = bestie;
 exports.default = _default;
+
+const regexBuild = async r => {
+  const res = r;
+  return res;
+};
+
+exports.regexBuild = regexBuild;

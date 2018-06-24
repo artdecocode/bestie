@@ -17,6 +17,8 @@ var _bosom = _interopRequireDefault(require("bosom"));
 
 var _tablature = _interopRequireDefault(require("tablature"));
 
+var _lib = require("../lib");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // const dir = resolve(process.cwd())
@@ -72,25 +74,7 @@ const extract = async _extract => {
     const sd = split(stdout); // await bosom('bestie-cache.json', sd)
     // }
 
-    const ssd = sd.map(pckg => {
-      pckg.packagePath = (0, _path.resolve)(dir, pckg.path, '..');
-      const rel = (0, _path.relative)(dir, pckg.packagePath);
-      if (rel == 'bestie') return undefined;
-      const {
-        packagePath
-      } = pckg;
-      const pc = (0, _path.resolve)(packagePath, 'package.json');
-
-      const {
-        devDependencies
-      } = require(pc);
-
-      return {
-        rel,
-        devDependencies,
-        ...pckg
-      };
-    }).filter(a => a).sort(({
+    const ssd = (0, _lib.makeSSd)(sd, dir).filter(a => a).sort(({
       size: sizeA
     }, {
       size: sizeB
