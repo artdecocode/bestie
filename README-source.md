@@ -80,6 +80,32 @@ When installed globally, `bestie` can report the size of `node_modules` director
 
 %FORK-sh src/bin/register -e ..%
 
+#### `bestie -u`: Uninstall `@babel`
+
+Removes the following modules:
+
+```fs
+@babel/cli
+@babel/core
+@babel/register
+@babel/plugin-syntax-object-rest-spread
+@babel/plugin-transform-modules-commonjs
+babel-plugin-transform-rename-import
+```
+
+And will ask for confirmation beforehand:
+
+```c
+Continue removing
+ @babel/cli@7.0.0-beta.51
+ @babel/core@7.0.0-beta.51
+ @babel/register@7.0.0-beta.51
+ @babel/plugin-syntax-object-rest-spread@7.0.0-beta.51
+ @babel/plugin-transform-modules-commonjs@7.0.0-beta.51
+ babel-plugin-transform-rename-import@2.2.0
+from bestie? [y] n
+```
+
 <!-- When `.` is passed as source directory (`dir`), or not passed at all, it is assumed that `src` and `test` directories in the `cwd` need transpilation. A command to run
 `babel` will be executed, e.g.,: -->
 

@@ -18,6 +18,7 @@ yarn add -E bestie
     * [`--help`, `-h`: Show Help](#--help--h-show-help)
     * [`b [src] [--out-dir=build]`: Build Project](#b-src---out-dirbuild-build-project)
     * [`bestie -e .`: Print `Node_modules` Size](#bestie--e--print-node_modules-size)
+    * [`bestie -u`: Uninstall `@babel`](#bestie--u-uninstall-babel)
 - [API](#api)
   * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-stream--processstdoutstderr-stream--processstderrcwd-string--processcwd-void)
 - [How To Reduce The Size Of Node_modules](#how-to-reduce-the-size-of-node_modules)
@@ -119,7 +120,7 @@ artdeco.bz             143.8 MB
 idio                   83.5 MB 
 rqt                    65.6 MB 
 koa2-jsx               54.2 MB 
-adc.sh                 45.4 MB 
+adc.sh                 45.5 MB 
 appshot                24.7 MB 
 mnp                    10 MB   
 pedantry               8 MB    
@@ -149,6 +150,32 @@ eslint-config-artdeco  4.6 MB
 yarn-s                 4.6 MB  
 mnp-idio               4.6 MB  
 mnp-irio               0 MB
+```
+
+#### `bestie -u`: Uninstall `@babel`
+
+Removes the following modules:
+
+```fs
+@babel/cli
+@babel/core
+@babel/register
+@babel/plugin-syntax-object-rest-spread
+@babel/plugin-transform-modules-commonjs
+babel-plugin-transform-rename-import
+```
+
+And will ask for confirmation beforehand:
+
+```c
+Continue removing
+ @babel/cli@7.0.0-beta.51
+ @babel/core@7.0.0-beta.51
+ @babel/register@7.0.0-beta.51
+ @babel/plugin-syntax-object-rest-spread@7.0.0-beta.51
+ @babel/plugin-transform-modules-commonjs@7.0.0-beta.51
+ babel-plugin-transform-rename-import@2.2.0
+from bestie? [y] n
 ```
 
 ## API
