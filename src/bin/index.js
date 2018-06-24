@@ -5,6 +5,7 @@ import { createReadStream } from 'fs'
 import { resolve } from 'path'
 import argufy from 'argufy'
 import usually from 'usually'
+import spawn from 'spawncommand'
 import bestie from '..'
 
 const {
@@ -12,13 +13,17 @@ const {
   from: _from = 'src',
   'out-dir': _to = 'build',
   _argv,
+  extract: _extract,
   help: _help,
+  install: _install,
 } = argufy({
   init: { short: 'i', boolean: true },
   help: { short: 'h', boolean: true },
   from: { command: true },
   'out-dir': '-d',
   args: { short: 'a' },
+  extract: { short: 'e', boolean: true },
+  install: { short: 'I', boolean: true },
 })
 
 const readable = resolve(__dirname, '../rc.json')
@@ -55,11 +60,37 @@ if (_help) {
   process.exit()
 }
 
-(async () => {
+
+const modules = [
+  '@babel/cli',
+  '@babel/core',
+  '@babel/register',
+  '@babel/plugin-syntax-object-rest-spread',
+  '@babel/plugin-transform-modules-commonjs',
+  'babel-plugin-transform-rename-import',
+]
+
+;(async () => {
+  if (_extract) {
+    require('./extract')
+    return
+  }
+
   try {
     if (_init) {
       await init()
       console.log('Written .babelrc file in the current directory')
+      return
+    }
+    if (_install) {
+      const p = spawn('yarn', [
+        'add',
+        '-DE',
+        ...modules,
+      ])
+      p.stderr.pipe(process.stderr)
+      p.stdout.pipe(process.stdout)
+      await p.promise
       return
     }
 
@@ -72,3 +103,4 @@ if (_help) {
     console.log(err)
   }
 })()
+
