@@ -3,6 +3,7 @@
 ### 2.1.0
 
 - [feature] `-e`, `--extract`: reports on the size of `node_modules`.
+- [feature] `-U`, `--uninstall`: uninstalls the babel dependencies in the current module.
 - [feature] `-I`, `--install`: installs the babel dependencies in the current module.
 - [doc] display section about reducing `node_modules` size with experiment data (3 gb -> 800 MB)
 
