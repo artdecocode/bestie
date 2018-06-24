@@ -1,5 +1,9 @@
 ## 24 June 2018
 
+### 2.0.2
+
+- [feature] Symlink `@babel` and `babel-plugin-transform-rename-import` when running `b`.
+
 ### 2.0.1
 
 - [fix] Correct `bin` paths.
