@@ -47,5 +47,8 @@
     "wrote": "1.4.0",
     "yarn-s": "1.1.0",
     "zoroaster": "2.1.0"
+  },
+  "dependencies": {
+    "tablature": "^1.0.0"
   }
 }

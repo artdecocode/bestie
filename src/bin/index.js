@@ -7,6 +7,7 @@ import argufy from 'argufy'
 import usually from 'usually'
 import spawn from 'spawncommand'
 import bestie from '..'
+import extract from './extract'
 
 const {
   init: _init,
@@ -22,7 +23,7 @@ const {
   from: { command: true },
   'out-dir': '-d',
   args: { short: 'a' },
-  extract: { short: 'e', boolean: true },
+  extract: { short: 'e' },
   install: { short: 'I', boolean: true },
 })
 
@@ -72,7 +73,7 @@ const modules = [
 
 ;(async () => {
   if (_extract) {
-    require('./extract')
+    await extract(_extract)
     return
   }
 

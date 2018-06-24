@@ -74,6 +74,12 @@ A command-line tool to build packages.
 
 The `b` binary will build the project, taking the files from the `src` directory and transpiling them into files in the `out-dir`.
 
+#### `bestie -e .`: Print `Node_modules` Size
+
+When installed globally, `bestie` can report the size of `node_modules` directory with `-e` command.
+
+%FORK-sh src/bin/register -e ..%
+
 <!-- When `.` is passed as source directory (`dir`), or not passed at all, it is assumed that `src` and `test` directories in the `cwd` need transpilation. A command to run
 `babel` will be executed, e.g.,: -->
 

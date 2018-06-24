@@ -17,6 +17,7 @@ yarn add -E bestie
     * [`--init`, `-i`: Init .Babelrc](#--init--i-init-babelrc)
     * [`--help`, `-h`: Show Help](#--help--h-show-help)
     * [`b [src] [--out-dir=build]`: Build Project](#b-src---out-dirbuild-build-project)
+    * [`bestie -e .`: Print `Node_modules` Size](#bestie--e--print-node_modules-size)
 - [API](#api)
   * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-stream--processstdoutstderr-stream--processstderrcwd-string--processcwd-void)
 - [How To Reduce The Size Of Node_modules](#how-to-reduce-the-size-of-node_modules)
@@ -106,6 +107,49 @@ A command-line tool to build packages.
 #### `b [src] [--out-dir=build]`: Build Project
 
 The `b` binary will build the project, taking the files from the `src` directory and transpiling them into files in the `out-dir`.
+
+#### `bestie -e .`: Print `Node_modules` Size
+
+When installed globally, `bestie` can report the size of `node_modules` directory with `-e` command.
+
+```sh
+[1mrel[0m                    [1msize[0m    
+idio-dev               146.3 MB
+artdeco.bz             143.8 MB
+idio                   83.5 MB 
+rqt                    65.6 MB 
+koa2-jsx               54.2 MB 
+adc.sh                 45.4 MB 
+appshot                24.7 MB 
+mnp                    10 MB   
+pedantry               8 MB    
+assert-throws          7.9 MB  
+documentary            7.8 MB  
+africa                 7.4 MB  
+restream               7.4 MB  
+expensive              7.1 MB  
+usually                7.1 MB  
+erte                   7.1 MB  
+tablature              7.1 MB  
+bosom                  7.1 MB  
+zoroaster              7.1 MB  
+snapshot-context       7 MB    
+argufy                 6.4 MB  
+makepromise            6.3 MB  
+reloquent              6.1 MB  
+erotic                 5.8 MB  
+pompeii                5.6 MB  
+ictx                   5.6 MB  
+window-info            5.6 MB  
+irio                   5.6 MB  
+nodeeu                 5.6 MB  
+aqt                    5.6 MB  
+spawncommand           4.7 MB  
+eslint-config-artdeco  4.6 MB  
+yarn-s                 4.6 MB  
+mnp-idio               4.6 MB  
+mnp-irio               0 MB
+```
 
 ## API
 
