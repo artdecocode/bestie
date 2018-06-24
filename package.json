@@ -8,6 +8,7 @@
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
     "dev": "node src/bin/register",
+    "doc": "NODE_DEBUG=doc doc README-source.md -o README.md",
     "build": "node src/bin/register --copy-files"
   },
   "files": [
@@ -15,29 +16,30 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/Sobesednik/bestie.git"
+    "url": "git://github.com/artdecocode/bestie.git"
   },
   "keywords": [
     "bestie"
   ],
-  "author": "Anton <anton@sobes.io>",
+  "author": "Anton <anton@adc.sh>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sobesednik/bestie/issues"
+    "url": "https://github.com/artdecocode/bestie/issues"
   },
-  "homepage": "https://github.com/Sobesednik/bestie#readme",
+  "homepage": "https://github.com/artdecocode/bestie#readme",
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.51",
     "@babel/core": "7.0.0-beta.51",
     "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.51",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.51",
     "@babel/register": "7.0.0-beta.51",
-    "babel-plugin-transform-rename-import": "2.2.0",
-    "yarn-s": "1.1.0",
-    "zoroaster": "2.1.0",
     "argufy": "1.2.0",
-    "usually": "1.0.0",
+    "babel-plugin-transform-rename-import": "2.2.0",
+    "documentary": "1.6.1",
     "spawncommand": "1.1.0",
-    "wrote": "1.4.0"
+    "usually": "1.0.0",
+    "wrote": "1.4.0",
+    "yarn-s": "1.1.0",
+    "zoroaster": "2.1.0"
   }
 }
