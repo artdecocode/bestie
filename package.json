@@ -10,6 +10,7 @@
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
+    "start": "node build/bin",
     "dev": "node src/bin/register",
     "doc": "NODE_DEBUG=doc doc README-source.md -o README.md",
     "build": "node src/bin/register --copy-files",
