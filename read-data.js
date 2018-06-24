@@ -1,4 +1,4 @@
-const { default: tablature } = require('tablature')
+// const { default: tablature } = require('tablature')
 
 const c1 = require('./data/cache-1')
 const d1 = require('./data/deps-1')
@@ -47,22 +47,22 @@ total.size2 = getSize(total.size2)
 total.size3 = getSize(total.size3)
 total.v = ''
 
-const t = tablature({
-  data: [...data, total],
-  keys: ['name', 'v', 'size', 'size2', 'size3', 'final'],
-  replacements: {
-    final(val) {
-      if (!val) return { value: '-', length: 1 }
-      const value = `x${val}`
-      return { value, length: value.length }
-    },
-    v(val) {
-      if (!val) return { value: '-', length: 1 }
-      const [, value] = /.+?-beta.(\d+)/.exec(val)
-      return { value, length: value.length }
-    },
-  },
-})
+// const t = tablature({
+//   data: [...data, total],
+//   keys: ['name', 'v', 'size', 'size2', 'size3', 'final'],
+//   replacements: {
+//     final(val) {
+//       if (!val) return { value: '-', length: 1 }
+//       const value = `x${val}`
+//       return { value, length: value.length }
+//     },
+//     v(val) {
+//       if (!val) return { value: '-', length: 1 }
+//       const [, value] = /.+?-beta.(\d+)/.exec(val)
+//       return { value, length: value.length }
+//     },
+//   },
+// })
 
 // console.log(t.replace(/\[0m/g, '').replace(/\[1m/g, ''))
 // const d = [...data, total]
