@@ -43,7 +43,18 @@ async function bestie({
   stderr = process.stderr,
   cwd = process.cwd()
 } = {}) {
-  await sl('@babel', 'babel-plugin-transform-rename-import');
+  const e = await (0, _wrote.exists)((0, _path.resolve)('node_modules', '@babel'));
+
+  if (e) {
+    await _lib.modules.reduce(async (a, c) => {
+      await a;
+      await sl(c);
+    }, 1);
+  } else {
+    await sl('@babel');
+  }
+
+  await sl('babel-plugin-transform-rename-import');
   await (0, _lib.singleBuild)(from, to, args, {
     cwd,
     stderr,

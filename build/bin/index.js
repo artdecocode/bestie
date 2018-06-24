@@ -17,6 +17,8 @@ var _ = _interopRequireDefault(require(".."));
 
 var _extract2 = _interopRequireDefault(require("./extract"));
 
+var _lib = require("../lib");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const {
@@ -85,8 +87,6 @@ if (_help) {
   process.exit();
 }
 
-const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-syntax-object-rest-spread', '@babel/plugin-transform-modules-commonjs', 'babel-plugin-transform-rename-import'];
-
 (async () => {
   if (_extract) {
     await (0, _extract2.default)(_extract);
@@ -101,7 +101,7 @@ const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-
     }
 
     if (_install) {
-      const p = (0, _spawncommand.default)('yarn', ['add', '-DE', ...modules]);
+      const p = (0, _spawncommand.default)('yarn', ['add', '-DE', ..._lib.modules]);
       p.stderr.pipe(process.stderr);
       p.stdout.pipe(process.stdout);
       await p.promise;

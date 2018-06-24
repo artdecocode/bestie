@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.singleBuild = singleBuild;
+exports.modules = void 0;
 
 var _spawncommand = _interopRequireDefault(require("spawncommand"));
 
@@ -25,3 +26,6 @@ async function singleBuild(from, to, args, {
   proc.stderr.pipe(stderr);
   await proc.promise;
 }
+
+const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-syntax-object-rest-spread', '@babel/plugin-transform-modules-commonjs', 'babel-plugin-transform-rename-import'];
+exports.modules = modules;
