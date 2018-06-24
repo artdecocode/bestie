@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "bestie compiles packages with babel.",
   "main": "build/srs",
-  "bin": "build/bin",
+  "bin": {
+    "b": "build/bin",
+    "bestie": "build/bin"
+  },
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
