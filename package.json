@@ -15,6 +15,7 @@
     "doc": "NODE_DEBUG=doc doc README-source.md -o README.md",
     "build": "node src/bin/register --copy-files",
     "postinstall": "node build/post-install",
+    "rec": "NODE_DEBUG=appshot appshot -T 23 -a Terminal -y 150 -f",
     "example/": "NODE_DEBUG=bestie node example example/example.js"
   },
   "files": [
@@ -42,7 +43,7 @@
     "argufy": "1.2.0",
     "babel-plugin-transform-rename-import": "2.2.0",
     "bosom": "1.0.0",
-    "documentary": "1.6.1",
+    "documentary": "1.7.0",
     "erte": "1.1.4",
     "reloquent": "1.0.1",
     "snapshot-context": "2.0.1",
