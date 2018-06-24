@@ -115,7 +115,7 @@ The `b` binary will build the project, taking the files from the `src` directory
 
 #### `bestie -e .`: Print `Node_modules` Size
 
-When installed globally, `bestie` can report the size of `node_modules` directory with `-e` command. The size is got from the `du` command. It might differ from from `du -sh ./*/node_modules` report.
+When installed globally, `bestie` can report the size of `node_modules` directory with `-e` command. The size is got from the `du` command. It might differ from the `du -sh ./*/node_modules` report.
 
 ```sh
 [1mrel[0m                    [1msize[0m    
