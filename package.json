@@ -31,6 +31,7 @@
     "@babel/register": "7.0.0-beta.51",
     "argufy": "1.2.0",
     "babel-plugin-transform-rename-import": "2.2.0",
+    "usually": "1.0.0",
     "yarn-s": "1.1.0",
     "zoroaster": "2.1.0"
   },
