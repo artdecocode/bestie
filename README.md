@@ -16,6 +16,7 @@ yarn add -E bestie
     * [`package.json`](#packagejson)
     * [`--init`, `-i`: Init .Babelrc](#--init--i-init-babelrc)
     * [`--help`, `-h`: Show Help](#--help--h-show-help)
+    * [`b [src] [--out-dir=build]`: Build Project](#b-src---out-dirbuild-build-project)
 - [API](#api)
   * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-stream--processstdoutstderr-stream--processstderrcwd-string--processcwd-void)
 
@@ -45,7 +46,7 @@ The usage via the CLI is encouraged and can be achieved by specifying a `script`
     "build": "b"
   },
   "dependencies": {
-    "bestie": "1.0.0"
+    "bestie": "2.0.0"
   }
 }
 ```
@@ -101,6 +102,10 @@ A command-line tool to build packages.
     bestie src --out-dir build --copy-files
 ```
 
+#### `b [src] [--out-dir=build]`: Build Project
+
+The `b` binary will build the project, taking the files from the `src` directory and transpiling them into files in the `out-dir`.
+
 ## API
 
 `bestie` can also be used programmatically and has the following API.
@@ -127,7 +132,7 @@ import bestie from 'bestie'
 ```
 node_modules/@babel/cli/bin/babel.js src --out-dir build --copy-files --include-dotfiles 
 
-🎉  Successfully compiled 4 files with Babel.
+🎉  Successfully compiled 5 files with Babel.
 ```
 
 ---

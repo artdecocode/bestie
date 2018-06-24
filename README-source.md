@@ -40,7 +40,7 @@ The usage via the CLI is encouraged and can be achieved by specifying a `script`
     "build": "b"
   },
   "dependencies": {
-    "bestie": "1.0.0"
+    "bestie": "2.0.0"
   }
 }
 ```
@@ -69,6 +69,10 @@ A command-line tool to build packages.
 
     bestie src --out-dir build --copy-files
 ```
+
+#### `b [src] [--out-dir=build]`: Build Project
+
+The `b` binary will build the project, taking the files from the `src` directory and transpiling them into files in the `out-dir`.
 
 <!-- When `.` is passed as source directory (`dir`), or not passed at all, it is assumed that `src` and `test` directories in the `cwd` need transpilation. A command to run
 `babel` will be executed, e.g.,: -->
