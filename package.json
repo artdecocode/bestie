@@ -10,6 +10,9 @@
     "dev": "node src/bin/register",
     "build": "node src/bin/register --copy-files"
   },
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/Sobesednik/bestie.git"
@@ -29,13 +32,11 @@
     "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.51",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.51",
     "@babel/register": "7.0.0-beta.51",
-    "argufy": "1.2.0",
     "babel-plugin-transform-rename-import": "2.2.0",
-    "usually": "1.0.0",
     "yarn-s": "1.1.0",
-    "zoroaster": "2.1.0"
-  },
-  "dependencies": {
+    "zoroaster": "2.1.0",
+    "argufy": "1.2.0",
+    "usually": "1.0.0",
     "spawncommand": "1.1.0",
     "wrote": "1.4.0"
   }
