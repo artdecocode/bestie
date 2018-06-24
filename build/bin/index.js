@@ -15,6 +15,8 @@ var _spawncommand = _interopRequireDefault(require("spawncommand"));
 
 var _ = _interopRequireDefault(require(".."));
 
+var _extract2 = _interopRequireDefault(require("./extract"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const {
@@ -42,8 +44,7 @@ const {
     short: 'a'
   },
   extract: {
-    short: 'e',
-    boolean: true
+    short: 'e'
   },
   install: {
     short: 'I',
@@ -88,8 +89,7 @@ const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-
 
 (async () => {
   if (_extract) {
-    require('./extract');
-
+    await (0, _extract2.default)(_extract);
     return;
   }
 

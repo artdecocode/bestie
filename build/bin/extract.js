@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _path = require("path");
 
 var _fs = require("fs");
@@ -10,16 +15,18 @@ var _spawncommand = _interopRequireDefault(require("spawncommand"));
 
 var _bosom = _interopRequireDefault(require("bosom"));
 
+var _tablature = _interopRequireDefault(require("tablature"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const dir = (0, _path.resolve)(__dirname, '../../..');
+// const dir = resolve(process.cwd())
+
 /**
  * Update information about directory's content with lstat.
  * @param {string} dirPath Path to the root directory
  * @param {string[]} dirContent
  * @returns {File[]} An array with file objects.
  */
-
 async function lstatFiles(dirPath, dirContent) {
   const readFiles = dirContent.map(async relativePath => {
     const path = (0, _path.resolve)(dirPath, relativePath);
@@ -35,90 +42,109 @@ async function lstatFiles(dirPath, dirContent) {
 
 const getCache = async () => {
   try {
-    const res = await (0, _bosom.default)('cache.json');
+    const res = await (0, _bosom.default)('bestie-cache.json');
     return res;
   } catch (err) {
     return '';
   }
 };
 
-(async () => {
+const extract = async _extract => {
   try {
-    let sd = await getCache();
+    // let sd = await getCache()
+    // if (!sd) {
+    const dir = _extract;
+    const d = await (0, _makepromise.default)(_fs.readdir, dir);
+    const ls = await lstatFiles(dir, d);
+    const p = ls.map(({
+      path
+    }) => {
+      return `./${(0, _path.relative)(dir, path)}/node_modules`;
+    });
+    const s = (0, _spawncommand.default)('du', ['-s', ...p], {
+      cwd: dir
+    }); // s.stderr.pipe(process.stderr)
 
-    if (!sd) {
-      const d = await (0, _makepromise.default)(_fs.readdir, dir);
-      const ls = await lstatFiles(dir, d);
-      const p = ls.map(({
-        path
-      }) => {
-        return `./${(0, _path.relative)(dir, path)}/node_modules`;
-      });
-      const s = (0, _spawncommand.default)('du', ['-s', ...p], {
-        cwd: dir
-      });
-      s.stderr.pipe(process.stderr);
-      const {
-        stdout
-      } = await s.promise;
-      (0, _fs.writeFileSync)('sizes.txt', stdout);
-      sd = split(stdout);
-      await (0, _bosom.default)('cache.json', sd);
-    }
+    const {
+      stdout
+    } = await s.promise; // writeFileSync('sizes.txt', stdout)
+
+    const sd = split(stdout); // await bosom('bestie-cache.json', sd)
+    // }
 
     const ssd = sd.map(pckg => {
+      pckg.packagePath = (0, _path.resolve)(dir, pckg.path, '..');
       const rel = (0, _path.relative)(dir, pckg.packagePath);
       if (rel == 'bestie') return undefined;
       const {
         packagePath
       } = pckg;
-      const p = (0, _path.resolve)(packagePath, 'package.json');
+      const pc = (0, _path.resolve)(packagePath, 'package.json');
 
       const {
         devDependencies
-      } = require(p);
+      } = require(pc);
 
       return {
         rel,
         devDependencies,
         ...pckg
       };
-    }).filter(a => a);
-    const json = JSON.stringify(ssd.map(({
-      devDependencies
-    }) => devDependencies), null, 2);
-    (0, _fs.writeFileSync)('deps.txt', json);
-    await ssd.reduce(async (acc, {
-      rel,
-      packagePath,
-      devDependencies
+    }).filter(a => a).sort(({
+      size: sizeA
+    }, {
+      size: sizeB
     }) => {
-      await acc;
-      const mods = ['eslint'];
-      const installed = mods.filter(m => {
-        const i = Object.keys(devDependencies).some(key => key.startsWith(m));
-        if (!i) console.log('%s not installed for %s', m, rel);
-        return i;
-      });
+      const pa = parseInt(sizeA);
+      const pb = parseInt(sizeB);
+      if (pb > pa) return 1;
+      if (pa > pb) return -1;
+      return 0;
+    });
+    const t = (0, _tablature.default)({
+      keys: ['rel', 'size'],
+      data: ssd,
+      replacements: {
+        size(val) {
+          const value = `${Math.round(val / 1024 * 10) / 10} MB`;
+          return {
+            value,
+            length: value.length
+          };
+        }
 
-      if (!installed.length) {
-        return;
       }
-
-      console.log('removing eslint from %s', rel);
-      const p = (0, _spawncommand.default)('yarn', ['remove', ...installed], {
-        cwd: packagePath
-      });
-      p.stdout.pipe(process.stdout);
-      p.stderr.pipe(process.stderr);
-      await p.promise;
-    }, {});
-    debugger;
+    });
+    console.log(t);
+    return; // const json = JSON.stringify(ssd.map(({ devDependencies }) => devDependencies), null, 2)
+    // writeFileSync('deps.txt', json)
+    // await ssd.reduce(async (acc, { rel, packagePath, devDependencies }) => {
+    //   await acc
+    //   const mods = ['eslint']
+    //   const installed = mods.filter((m) => {
+    //     const i = Object.keys(devDependencies).some(key => key.startsWith(m))
+    //     if (!i) console.log('%s not installed for %s', m, rel)
+    //     return i
+    //   })
+    //   if (!installed.length) {
+    //     return
+    //   }
+    //   console.log('removing eslint from %s', rel)
+    //   const p = spawn('yarn', ['remove', ...installed], {
+    //     cwd: packagePath,
+    //   })
+    //   p.stdout.pipe(process.stdout)
+    //   p.stderr.pipe(process.stderr)
+    //   await p.promise
+    // }, {})
+    // debugger
   } catch (err) {
     console.log(err);
   }
-})();
+};
 
+var _default = extract;
+exports.default = _default;
 const modules = ['@babel/cli', '@babel/core', '@babel/register', '@babel/plugin-syntax-object-rest-spread', '@babel/plugin-transform-modules-commonjs', 'babel-plugin-transform-rename-import'];
 
 const split = body => {
@@ -128,11 +154,9 @@ const split = body => {
 
   while ((r = re.exec(body)) !== null) {
     const [, size, path] = r;
-    const packagePath = (0, _path.resolve)(dir, path, '..');
     res.push({
       size,
-      path,
-      packagePath
+      path
     });
   }
 
