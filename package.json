@@ -4,8 +4,8 @@
   "description": "bestie compiles packages with babel.",
   "main": "build/srs",
   "bin": {
-    "b": "build/bin",
-    "bestie": "build/bin"
+    "b": "build/bin/index.js",
+    "bestie": "build/bin/index.js"
   },
   "scripts": {
     "test": "zoroaster test/spec",
