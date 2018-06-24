@@ -314,7 +314,7 @@ Before upgrading to using `bestie`, a standard package `node_module` directory w
 
 At first, `@babel` was removed, and then `eslint`. This allowed to save 2 GB of disk space in total.
 
-%FORK-table read-data.js%
+%EXAMPLE: read-data.json, table%
 
 ---
 
