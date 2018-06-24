@@ -34,7 +34,7 @@
         "NODE_DEBUG": "bestie",
       },
       "args": [
-        "-u", "..",
+        "-I", "..",
         // "--copy-files",
       ],
       "console": "integratedTerminal",

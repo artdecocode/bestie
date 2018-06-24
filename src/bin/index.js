@@ -29,7 +29,7 @@ const {
   args: { short: 'a' },
   extract: { short: 'e' },
   install: { short: 'I', boolean: true },
-  uninstall: { short: 'u', boolean: true },
+  uninstall: { short: 'U', boolean: true },
 })
 
 const readable = resolve(__dirname, '../rc.json')
@@ -49,10 +49,12 @@ bestie watch
 
 const u = usually({
   usage: {
-    '--help, -h': 'print the help message',
-    '--init, -i': 'write the .babelrc in the current directory',
+    '--help, -h': 'Print the help message.',
+    '--init, -i': 'Write the .babelrc in the current directory.',
+    '--install, -I': 'Add @babel dependencies.',
+    '--uninstall, -U': 'Remove @babel dependencies from the current directory.',
   },
-  line: 'bestie [src] [--out-dir build] [[--copy-files] --etc]',
+  line: 'bestie [src] [--out-dir build] [[--copy-files] --etc] | -iIU',
   description: `A command-line tool to build packages.
   Source is the first argument, followed by any additional arguments
   Default source is src and default out-dir is build.

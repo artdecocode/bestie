@@ -53,22 +53,7 @@ Create a `.babelrc` file in the current direcory. The default content is:
 
 #### `--help`, `-h`: Show Help
 
-```sh
-A command-line tool to build packages.
-  Source is the first argument, followed by any additional arguments
-  Default source is src and default out-dir is build.
-  Any other additional arguments are passed along to babel.
-
-
-  bestie [src] [--out-dir build] [[--copy-files] --etc]
-
-        --help, -h      print the help message
-        --init, -i      write the .babelrc in the current directory
-
-  Example:
-
-    bestie src --out-dir build --copy-files
-```
+%FORK-sh src/bin/register -h%
 
 #### `b [src] [--out-dir=build]`: Build Project
 
@@ -80,9 +65,9 @@ When installed globally, `bestie` can report the size of `node_modules` director
 
 %FORK-sh src/bin/register -e ..%
 
-#### `bestie -u`: Uninstall `@babel`
+#### `bestie -I`: Install `@Babel`
 
-Removes the following modules:
+Installs the modules in the list below in the current package directory with the latest version.
 
 ```fs
 @babel/cli
@@ -93,7 +78,9 @@ Removes the following modules:
 babel-plugin-transform-rename-import
 ```
 
-And will ask for confirmation beforehand:
+#### `bestie -U`: Uninstall `@Babel`
+
+Removes the modules (from the same list as installed), and will ask for confirmation beforehand:
 
 ```c
 Continue removing

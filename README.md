@@ -18,7 +18,8 @@ yarn add -E bestie
     * [`--help`, `-h`: Show Help](#--help--h-show-help)
     * [`b [src] [--out-dir=build]`: Build Project](#b-src---out-dirbuild-build-project)
     * [`bestie -e .`: Print `Node_modules` Size](#bestie--e--print-node_modules-size)
-    * [`bestie -u`: Uninstall `@babel`](#bestie--u-uninstall-babel)
+    * [`bestie -I`: Install `@Babel`](#bestie--i-install-babel)
+    * [`bestie -U`: Uninstall `@Babel`](#bestie--u-uninstall-babel)
 - [API](#api)
   * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-stream--processstdoutstderr-stream--processstderrcwd-string--processcwd-void)
 - [How To Reduce The Size Of Node_modules](#how-to-reduce-the-size-of-node_modules)
@@ -95,10 +96,12 @@ A command-line tool to build packages.
   Any other additional arguments are passed along to babel.
 
 
-  bestie [src] [--out-dir build] [[--copy-files] --etc]
+  bestie [src] [--out-dir build] [[--copy-files] --etc] | -iIU
 
-        --help, -h      print the help message
-        --init, -i      write the .babelrc in the current directory
+	--help, -h     	Print the help message.
+	--init, -i     	Write the .babelrc in the current directory.
+	--install, -I  	Add @babel dependencies.
+	--uninstall, -U	Remove @babel dependencies from the current directory.
 
   Example:
 
@@ -152,9 +155,9 @@ mnp-idio               4.6 MB
 mnp-irio               0 MB
 ```
 
-#### `bestie -u`: Uninstall `@babel`
+#### `bestie -I`: Install `@Babel`
 
-Removes the following modules:
+Installs the modules in the list below in the current package directory with the latest version.
 
 ```fs
 @babel/cli
@@ -165,7 +168,9 @@ Removes the following modules:
 babel-plugin-transform-rename-import
 ```
 
-And will ask for confirmation beforehand:
+#### `bestie -U`: Uninstall `@Babel`
+
+Removes the modules (from the same list as installed), and will ask for confirmation beforehand:
 
 ```c
 Continue removing
