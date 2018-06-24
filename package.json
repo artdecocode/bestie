@@ -1,6 +1,6 @@
 {
   "name": "bestie",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "bestie compiles packages with babel.",
   "main": "build/srs",
   "bin": {
