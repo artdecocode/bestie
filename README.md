@@ -126,9 +126,9 @@ koa2-jsx               54.2 MB
 adc.sh                 45.5 MB 
 appshot                24.7 MB 
 mnp                    10 MB   
+documentary            9.3 MB  
 pedantry               8 MB    
 assert-throws          7.9 MB  
-documentary            7.8 MB  
 africa                 7.4 MB  
 restream               7.4 MB  
 expensive              7.1 MB  
@@ -182,6 +182,15 @@ Continue removing
  babel-plugin-transform-rename-import@2.2.0
 from bestie? [y] n
 ```
+
+<details>
+  <summary><code>b -U</code></summary>
+  <table>
+  <tr><td>
+    <img alt="Uninstalling babel dependencies." src="doc/uninstall.gif" />
+  </td></tr>
+  </table>
+</details>
 
 ## API
 

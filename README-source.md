@@ -93,6 +93,11 @@ Continue removing
 from bestie? [y] n
 ```
 
+%GIF doc/uninstall.gif
+Uninstalling babel dependencies.
+<code>b -U</code>
+%
+
 <!-- When `.` is passed as source directory (`dir`), or not passed at all, it is assumed that `src` and `test` directories in the `cwd` need transpilation. A command to run
 `babel` will be executed, e.g.,: -->
 
@@ -145,7 +150,6 @@ Calling the `bestie` function from the source code will return a promise to tran
 %FORK example example/example.js%
 
 ## How To Reduce The Size Of Node_modules
-
 
 Before upgrading to using `bestie`, a standard package `node_module` directory would occupy ~ 90 MB of disk space, including `@babel/cli`, `@babel/core`, `@babel/register`, `@babel/plugin-syntax-object-rest-spread`, `@babel/plugin-transform-modules-commonjs`, `babel-plugin-transform-rename-import` and `eslint`.
 
