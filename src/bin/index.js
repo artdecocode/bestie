@@ -10,7 +10,7 @@ import bosom from 'bosom'
 import { c } from 'erte'
 import bestie from '..'
 import extract from './extract'
-import { modules, makeSSd, filterInstalled } from '../lib'
+import { modules, makeSSd, filterInstalled, filterNotInstalled } from '../lib'
 
 const {
   init: _init,
@@ -66,6 +66,15 @@ if (_help) {
   process.exit()
 }
 
+const readName = async () => {
+  try {
+    const { name } = await bosom('package.json')
+    return name
+  } catch (err) {
+    throw new Error('Cannot read package.json on the current package')
+  }
+}
+
 (async () => {
   if (_extract) {
     await extract(_extract)
@@ -79,6 +88,13 @@ if (_help) {
       return
     }
     if (_install) {
+      const name = await readName()
+      const [{ devDependencies }] = makeSSd([{ path: 'node_modules' }], '.')
+      const i = filterNotInstalled(modules, devDependencies)
+      if (!i.length) {
+        console.log('Nothing to install for %s', name)
+        return
+      }
       const p = spawn('yarn', [
         'add',
         '-DE',
@@ -90,12 +106,7 @@ if (_help) {
       return
     }
     if (_uninstall) {
-      let name
-      try {
-        ({ name } = await bosom('package.json'))
-      } catch (err) {
-        throw new Error('Cannot read package.json on the current package')
-      }
+      const name = await readName()
       const [{ devDependencies }] = makeSSd([{ path: 'node_modules' }], '.')
       const i = filterInstalled(modules, devDependencies)
       const titles = i.map(j => `${j}@${devDependencies[j]}`)

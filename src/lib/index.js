@@ -1,5 +1,8 @@
 import spawn from 'spawncommand'
 import { resolve, relative } from 'path'
+import { debuglog } from 'util'
+
+const LOG = debuglog('bestie')
 
 export async function singleBuild(from, to, args, {
   cwd = process.cwd(),
@@ -51,8 +54,17 @@ export const makeSSd = (sd, dir) => {
 export const filterInstalled = (mods, devDependencies, rel = 'unknown') => {
   const d = Object.keys(devDependencies)
   return mods.filter((m) => {
-    const i = d.some(key => key.startsWith(m))
-    if (!i) console.log('%s not installed for %s', m, rel)
+    const i = d.some(key => key == m)
+    if (!i) LOG('%s not installed for %s', m, rel)
     return i
+  })
+}
+
+
+export const filterNotInstalled = (mods, devDependencies) => {
+  const d = Object.keys(devDependencies)
+  return mods.filter((m) => {
+    const i = d.some(key => key == m)
+    return !i
   })
 }
