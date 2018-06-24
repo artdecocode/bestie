@@ -12,8 +12,8 @@ const data = c1.map(({ size, path }, i) => {
   const b = parseInt(size)
   const a = parseInt(size3)
   return {
-    v: v || '',
     name: path.replace('node_modules', ''),
+    v: v || '',
     size: b,
     size2: parseInt(size2),
     size3: a,
@@ -64,4 +64,20 @@ const t = tablature({
   },
 })
 
-console.log(t.replace(/\[0m/g, '').replace(/\[1m/g, ''))
+// console.log(t.replace(/\[0m/g, '').replace(/\[1m/g, ''))
+// const d = [...data, total]
+
+const headings = Object.keys(data[0])
+
+console.log(JSON.stringify([
+  headings,
+  ...[...data, total].map((i) => {
+    i.name  = i.name.replace(/^\.\/(.+?)\/$/, (m, a) => a)
+    i.final = `x${i.final}`
+    const r = headings.map(h => {
+      const v = i[h]
+      return v
+    })
+    return r
+  }),
+]))
