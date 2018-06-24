@@ -42,13 +42,15 @@
     "babel-plugin-transform-rename-import": "2.2.0",
     "bosom": "1.0.0",
     "documentary": "1.6.1",
+    "erte": "1.1.4",
+    "reloquent": "1.0.1",
+    "snapshot-context": "2.0.1",
     "spawncommand": "2.0.1",
+    "tablature": "1.0.0",
     "usually": "1.0.0",
     "wrote": "1.4.0",
     "yarn-s": "1.1.0",
     "zoroaster": "2.1.0"
   },
-  "dependencies": {
-    "tablature": "^1.0.0"
-  }
+  "dependencies": {}
 }
