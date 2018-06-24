@@ -1,5 +1,9 @@
 ## 24 June 2018
 
+### 2.1.1
+
+- [doc] show babel install output, cache final table, `yarn -DE`
+
 ### 2.1.0
 
 - [feature] `-e`, `--extract`: reports on the size of `node_modules`.
