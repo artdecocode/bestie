@@ -1,5 +1,9 @@
 ## 24 June 2018
 
+### 2.0.1
+
+- [fix] Correct `bin` paths.
+
 ### 2.0.0
 
 - [feature] use `bestie` via the local linking as a proxy to `babel`
