@@ -14,13 +14,33 @@ yarn add -E bestie
 
 ### CLI
 
+To [`install bestie`](t), you need to clone its repository in the working directory, and install it with the dev dependencies from there. Then, `yarn link` it, and again in other projects.
+
+```sh
+cd ~/work
+git clone https://github.com/artdecocode/bestie.git
+cd bestie
+yarn
+link
+cd ..
+cd project
+yarn link bestie
+```
+
+Because the all dependencies that the babel needs are in the bestie directory, they will be used. No need to install them for each individual project.
+
+<!-- Despite this, the process still seems hack-ish and therefore the real aim is to use regular expressions-->
+
 The usage via the CLI is encouraged and can be achieved by specifying a `script` field in the [`package.json`](t) file, e.g.,
 
 ```json
 {
   "name": "package",
   "scripts": {
-  	"build": "b"
+    "build": "b"
+  },
+  "dependencies": {
+    "bestie": "1.0.0"
   }
 }
 ```
@@ -29,7 +49,7 @@ The usage via the CLI is encouraged and can be achieved by specifying a `script`
 
 Create a `.babelrc` file in the current direcory. The default content is:
 
-%FORK-json print-babelrc.js%
+%EXAMPLE: .babelrc, json%
 
 #### `--help`, `-h`: Show Help
 
@@ -88,9 +108,9 @@ const bestie = require('bestie/es5')
     "from?": ["string", "src"],
     "to?": ["string", "build"],
     "args?": ["string[]", "[]"],
-    "stdout?": ["Stream", "`process.stdout`"],
-    "stderr?": ["Stream", "`process.stderr`"],
-    "cwd?": ["string", "`process.cwd()`"]
+    "stdout?": ["Stream", "process.stdout"],
+    "stderr?": ["Stream", "process.stderr"],
+    "cwd?": ["string", "process.cwd()"]
   }]
 ]
 ```

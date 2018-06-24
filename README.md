@@ -12,13 +12,29 @@ yarn add -E bestie
 
 - [Table Of Contents](#table-of-contents)
   * [CLI](#cli)
+    * [`install bestie`](#install-bestie)
     * [`package.json`](#packagejson)
     * [`--init`, `-i`: Init .Babelrc](#--init--i-init-babelrc)
     * [`--help`, `-h`: Show Help](#--help--h-show-help)
 - [API](#api)
-  * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-streamstderr-streamcwd-string-void)
+  * [`async bestie(config: object)`](#async-bestieconfig-from-string--srcto-string--buildargs-string--stdout-stream--processstdoutstderr-stream--processstderrcwd-string--processcwd-void)
 
 ### CLI
+
+To <a name="install-bestie">`install bestie`</a>, you need to clone its repository in the working directory, and install it with the dev dependencies from there. Then, `yarn link` it, and again in other projects.
+
+```sh
+cd ~/work
+git clone https://github.com/artdecocode/bestie.git
+cd bestie
+yarn
+link
+cd ..
+cd project
+yarn link bestie
+```
+
+Because the all dependencies that the babel needs are in the bestie directory, they will be used. No need to install them for each individual project.
 
 The usage via the CLI is encouraged and can be achieved by specifying a `script` field in the <a name="packagejson">`package.json`</a> file, e.g.,
 
@@ -26,7 +42,10 @@ The usage via the CLI is encouraged and can be achieved by specifying a `script`
 {
   "name": "package",
   "scripts": {
-  	"build": "b"
+    "build": "b"
+  },
+  "dependencies": {
+    "bestie": "1.0.0"
   }
 }
 ```
@@ -36,7 +55,31 @@ The usage via the CLI is encouraged and can be achieved by specifying a `script`
 Create a `.babelrc` file in the current direcory. The default content is:
 
 ```json
-
+{
+  "plugins": [
+    "@babel/plugin-syntax-object-rest-spread",
+    "@babel/plugin-transform-modules-commonjs"
+  ],
+  "env": {
+    "test-build": {
+      "plugins": [
+        [
+          "transform-rename-import",
+          {
+            "original": "^((../)+)src",
+            "replacement": "$1build"
+          }
+        ]
+      ],
+      "ignore": [
+        "build/**/*.js"
+      ]
+    },
+    "debug": {
+      "retainLines": true
+    }
+  }
+}
 ```
 
 #### `--help`, `-h`: Show Help
@@ -62,7 +105,7 @@ A command-line tool to build packages.
 
 `bestie` can also be used programmatically and has the following API.
 
-### `async bestie(`<br/>&nbsp;&nbsp;`config: {`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`from?: string = src,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`to?: string = build,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`args?: string[] = [],`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stdout?: Stream = `process.stdout`,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stderr?: Stream = `process.stderr`,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`cwd?: string = `process.cwd()`,`<br/>&nbsp;&nbsp;`},`<br/>`): void`
+### `async bestie(`<br/>&nbsp;&nbsp;`config: {`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`from?: string = src,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`to?: string = build,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`args?: string[] = [],`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stdout?: Stream = process.stdout,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`stderr?: Stream = process.stderr,`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`cwd?: string = process.cwd(),`<br/>&nbsp;&nbsp;`},`<br/>`): void`
 
 Calling the `bestie` function from the source code will return a promise to transpile files. In background, `babel` will be spawned via the `child_process`.
 
