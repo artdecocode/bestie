@@ -11,7 +11,7 @@ var _argufy = _interopRequireDefault(require("argufy"));
 
 var _usually = _interopRequireDefault(require("usually"));
 
-var _lib = _interopRequireDefault(require("../lib"));
+var _ = _interopRequireDefault(require(".."));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,7 +80,7 @@ if (_help) {
       return;
     }
 
-    await (0, _lib.default)({
+    await (0, _.default)({
       from: _from,
       to: _to,
       args: _argv
