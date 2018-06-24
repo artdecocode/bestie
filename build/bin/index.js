@@ -165,7 +165,8 @@ const readName = async () => {
         defaultValue: 'y'
       });
       if (y != 'y') return;
-      const p = (0, _spawncommand.default)('yarn', ['remove', '-DE', ...i]);
+      const args = ['remove', ...i];
+      const p = (0, _spawncommand.default)('yarn', args);
       p.stderr.pipe(process.stderr);
       p.stdout.pipe(process.stdout);
       await p.promise;
