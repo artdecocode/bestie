@@ -1,5 +1,11 @@
 ## 24 June 2018
 
+### 2.1.0
+
+- [feature] `-e`, `--extract`: reports on the size of `node_modules`.
+- [feature] `-I`, `--install`: installs the babel dependencies in the current module.
+- [doc] display section about reducing `node_modules` size with experiment data (3 gb -> 800 MB)
+
 ### 2.0.2
 
 - [feature] Symlink `@babel` and `babel-plugin-transform-rename-import` when running `b`.
