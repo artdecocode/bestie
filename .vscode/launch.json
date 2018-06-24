@@ -34,8 +34,8 @@
         "NODE_DEBUG": "bestie",
       },
       "args": [
-        "--init",
-        "--copy-files",
+        // "--init",
+        // "--copy-files",
       ],
       "console": "integratedTerminal",
       "skipFiles": [

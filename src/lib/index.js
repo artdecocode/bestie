@@ -1,7 +1,6 @@
 import spawn from 'spawncommand'
 import { relative } from 'path'
 
-
 export async function singleBuild(from, to, args, {
   cwd = process.cwd(),
   stdout,

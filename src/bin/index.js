@@ -57,7 +57,6 @@ if (_help) {
 
 (async () => {
   try {
-
     if (_init) {
       await init()
       console.log('Written .babelrc file in the current directory')
