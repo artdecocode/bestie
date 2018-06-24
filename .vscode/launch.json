@@ -34,7 +34,7 @@
         "NODE_DEBUG": "bestie",
       },
       "args": [
-        // "--init",
+        "-e",
         // "--copy-files",
       ],
       "console": "integratedTerminal",
@@ -46,7 +46,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch App2",
-      "program": "${workspaceFolder}/example/index.js",
+      "program": "${workspaceFolder}/read-data.js",
       "env": {
         "BABEL_ENV": "debug",
         "NODE_DEBUG": "bestie",

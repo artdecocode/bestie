@@ -39,7 +39,7 @@ const total = data.reduce((acc, item) => {
 }, { name: 'total' })
 
 const getSize = (s) => {
-  return Math.round(s / 1024) + ' KB'
+  return Math.round(s / 1024) + ' MB'
 }
 total.final = Math.round(((total.size - total.size3)/total.size3))
 total.size = getSize(total.size)
@@ -64,4 +64,4 @@ const t = tablature({
   },
 })
 
-console.log(t)
+console.log(t.replace(/\[0m/g, '').replace(/\[1m/g, ''))

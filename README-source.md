@@ -125,6 +125,12 @@ Calling the `bestie` function from the source code will return a promise to tran
 
 %FORK example example/example.js%
 
+## How To Reduce The Size Of Node_modules
+
+Before upgrading to using `bestie`, each package directory occupied at least 30 MB of dependencies, most of which are the `babel` dependencies.
+
+%FORK read-data.js%
+
 ---
 
 (c) [Art Deco Code][1] 2018
