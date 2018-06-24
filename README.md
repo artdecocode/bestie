@@ -138,7 +138,11 @@ node_modules/@babel/cli/bin/babel.js src --out-dir build --copy-files --include-
 
 ## How To Reduce The Size Of Node_modules
 
-Before upgrading to using `bestie`, each package directory occupied at least 30 MB of dependencies, most of which are the `babel` dependencies.
+
+
+Before upgrading to using `bestie`, a standard package `node_module` directory would occupy ~ 90 MB of disk space, including `@babel/cli`, `@babel/core`, `@babel/register`, `@babel/plugin-syntax-object-rest-spread`, `@babel/plugin-transform-modules-commonjs`, `babel-plugin-transform-rename-import` and `eslint`.
+
+At first, `@babel` was removed, and then `eslint`. This allowed to save 2 GB of disk space in total.
 
 ```
 name                      v   size     size2    size3   final
