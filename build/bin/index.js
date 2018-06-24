@@ -98,6 +98,17 @@ if (_help) {
   process.exit();
 }
 
+const readName = async () => {
+  try {
+    const {
+      name
+    } = await (0, _bosom.default)('package.json');
+    return name;
+  } catch (err) {
+    throw new Error('Cannot read package.json on the current package');
+  }
+};
+
 (async () => {
   if (_extract) {
     await (0, _extract2.default)(_extract);
@@ -112,6 +123,19 @@ if (_help) {
     }
 
     if (_install) {
+      const name = await readName();
+      const [{
+        devDependencies
+      }] = (0, _lib.makeSSd)([{
+        path: 'node_modules'
+      }], '.');
+      const i = (0, _lib.filterNotInstalled)(_lib.modules, devDependencies);
+
+      if (!i.length) {
+        console.log('Nothing to install for %s', name);
+        return;
+      }
+
       const p = (0, _spawncommand.default)('yarn', ['add', '-DE', ..._lib.modules]);
       p.stderr.pipe(process.stderr);
       p.stdout.pipe(process.stdout);
@@ -120,16 +144,7 @@ if (_help) {
     }
 
     if (_uninstall) {
-      let name;
-
-      try {
-        ({
-          name
-        } = await (0, _bosom.default)('package.json'));
-      } catch (err) {
-        throw new Error('Cannot read package.json on the current package');
-      }
-
+      const name = await readName();
       const [{
         devDependencies
       }] = (0, _lib.makeSSd)([{

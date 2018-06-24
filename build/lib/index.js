@@ -4,13 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.singleBuild = singleBuild;
-exports.filterInstalled = exports.makeSSd = exports.modules = void 0;
+exports.filterNotInstalled = exports.filterInstalled = exports.makeSSd = exports.modules = void 0;
 
 var _spawncommand = _interopRequireDefault(require("spawncommand"));
 
 var _path = require("path");
 
+var _util = require("util");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const LOG = (0, _util.debuglog)('bestie');
 
 async function singleBuild(from, to, args, {
   cwd = process.cwd(),
@@ -61,10 +65,20 @@ exports.makeSSd = makeSSd;
 const filterInstalled = (mods, devDependencies, rel = 'unknown') => {
   const d = Object.keys(devDependencies);
   return mods.filter(m => {
-    const i = d.some(key => key.startsWith(m));
-    if (!i) console.log('%s not installed for %s', m, rel);
+    const i = d.some(key => key == m);
+    if (!i) LOG('%s not installed for %s', m, rel);
     return i;
   });
 };
 
 exports.filterInstalled = filterInstalled;
+
+const filterNotInstalled = (mods, devDependencies) => {
+  const d = Object.keys(devDependencies);
+  return mods.filter(m => {
+    const i = d.some(key => key == m);
+    return !i;
+  });
+};
+
+exports.filterNotInstalled = filterNotInstalled;
