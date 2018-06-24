@@ -7,6 +7,7 @@
   "scripts": {
     "test": "zoroaster test/spec",
     "test-watch": "zoroaster test/spec --watch",
+    "dev": "node src/bin/register",
     "build": "node bin/bestie src,bin,test --copy-files"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "@babel/plugin-syntax-object-rest-spread": "7.0.0-beta.51",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.51",
     "@babel/register": "7.0.0-beta.51",
+    "argufy": "1.2.0",
     "babel-plugin-transform-rename-import": "2.2.0",
     "yarn-s": "1.1.0",
     "zoroaster": "2.1.0"
